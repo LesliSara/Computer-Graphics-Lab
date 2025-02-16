@@ -4,17 +4,10 @@
 
 ### Universidad Nacional Autonoma de México
 ### Facultad de Ingeniería, DIE
-<br>
+
+### Practice 1
 
 <p style="text-align: left;">
-In this repository, I will upload each of my assignments from my Computer Graphics lab class. Each branch will correspond to one of these assignments, and the main branch will contain the current version of the code.💻</p>
-<br>
+In this first practice, we developed a program that performs two main tasks. The first task involves creating a window that changes its background color randomly, using the RGB color range, every 2 seconds. This effect brings dynamic visual interaction to the application. The second task requires the creation of our initial letters, in my case "LSCB", each composed of triangles. These activities aim to practice basic graphical programming concepts and the manipulation of colors and shapes within a graphical window.
+<\p>
 
-## Alumna 🌸
-### Lesliee Sarahí Cruz Buenavista
-
-## Grupo de Laboratorio 🖥️
-Grupo: 2 - Ing. José Roque Román Guadarrama
-
-## Grupp de Teoría 📓
-Grupo: 4 - Ing. José Roque Román Guadarrama
