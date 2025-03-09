@@ -4,7 +4,7 @@
 ### Universidad Nacional Autónoma de México  
 ### Facultad de Ingeniería, DIE  
 
-### Practice: Hierarchical Models
+### Practice 4
 
 #### Objective
 In this practice, we implemented hierarchical modeling to construct a **3D crane** and a **robotic animal**. The goal was to develop articulated structures using geometric primitives and enable interaction through keyboard controls.
