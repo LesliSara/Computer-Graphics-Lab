@@ -363,45 +363,46 @@ int main()
 		*/
 		// Instancia del coche
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 0.80f, 0.0f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0 + mainWindow.gettraslacion(), 0.35f, 0.0f));
+		modelaux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Carro_M.RenderModel();
 
-		// Llanta delantera derecha
+		// Llanta trasera derecha
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-3.558f, -0.55f, 6.714f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(-5.611f, -0.875f, 3.922f));
+		model = glm::rotate(model, glm::radians(mainWindow.getllantaDerInf()), glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaDerecha_M.RenderModel();
 
 
-		// Llanta trasera derecha
+		// Llanta delantera derecha
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(-3.558f, -0.55f, -5.216f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(6.338f, -0.875f, 3.922f));
+		model = glm::rotate(model, glm::radians(mainWindow.getllantaDerSup()), glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaDerecha_M.RenderModel();
 
 		// Llanta delantera izquierda
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(3.643f, -0.55f, 6.691f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(6.338f, -0.875f, -3.672f));
+		model = glm::rotate(model, glm::radians(mainWindow.getllantaIzqSup()), glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaIzquierda_M.RenderModel();
 
 		// Llanta trasera izquierda
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(3.643f, -0.55f, -5.221f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(-5.611f, -0.875f, -3.672f));
+		model = glm::rotate(model, glm::radians(mainWindow.getllantaIzqInf()), glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaIzquierda_M.RenderModel();
 
 
 		// Cofre
 		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, 1.90f, 4.845f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(3.82f, 1.601f, 0.118f));
+		model = glm::rotate(model, glm::radians(mainWindow.getcofreaAbre()), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(mainWindow.getcofreCierra()), glm::vec3(0.0f, 0.0f, -1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Cofre_M.RenderModel();
 

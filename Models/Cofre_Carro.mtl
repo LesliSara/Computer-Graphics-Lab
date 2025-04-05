@@ -1,7 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
-# File Created: 29.03.2025 22:33:19
+# File Created: 01.04.2025 23:11:03
 
-newmtl cocheSeparado_NISSAN_GTR_chrome
+newmtl CocheEscalado_NISSAN_GTR_chrome
 	Ns 10.0000
 	Ni 1.5000
 	d 1.0000
@@ -12,5 +12,5 @@ newmtl cocheSeparado_NISSAN_GTR_chrome
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka gum3.jpg
-	map_Kd gum3.jpg
+	map_Ka gumball.png
+	map_Kd gumball.png
