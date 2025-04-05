@@ -1,32 +1,37 @@
-<h1 align="center">Computer Graphics Lab 🚗</h1>
+<h1 align="center">Computer Graphics Lab 🎲🚗</h1>
 <img align="right" alt="graphics" width="250" style="margin-left: 20;" src="https://static.javatpoint.com/tutorial/computer-graphics/images/computer-graphics-tutorial.png">
 
 ### Universidad Nacional Autónoma de México  
 ### Facultad de Ingeniería, DIE  
 
-### Practice 5
+### Practice 6: Texture Mapping in 3D Models
 
 #### Objective
-In this practice, we imported and animated a **3D car model** using hierarchical transformations. The goal was to enable interaction and movement through keyboard controls.
+In this practice, we focused on **applying textures** to custom 3D models, combining both programmatic and image-based methods. We explored UV mapping, multi-material separation, and visual enhancement through textures.
 
 <h2>Implementation Details</h2>
 
-### 🚗 Car Model Integration
-- **Scaling**: The car model was imported and adjusted to a suitable scale.
-- **Hierarchical Setup**: The components were structured to allow independent movement.
+### 🎲 Exercise 1: Textured Octahedron
+- **Geometry**: An 8-faced die (octahedron) was modeled using triangles.
+- **Texture Mapping**: Each face was textured using UV coordinates defined in code.
+- **Result**: The die displayed distinct face patterns directly rendered via code-based texturing.
 
-### 🛞 Wheels Rotation
-- **Independent Wheel Models**: Four wheels were imported and positioned correctly.
-- **Synchronized Rotation**: A shared rotation value was applied to allow all wheels to rotate forward and backward when moving.
+### 🚗 Exercise 2: Car Wheels Texturing
+- **Model Import**: The car model with 4 wheels was imported.
+- **Material Separation**: Each wheel was separated into **tire (rubber)** and **rim** components.
+- **Texture Application**: Different textures were applied to simulate the rubbery appearance of the tires and the metallic look of the rims.
 
-### 🔧 Hood Animation
-- **Hierarchical Attachment**: The car hood was imported and positioned correctly.
-- **Opening Mechanism**: A rotation transformation was applied to enable opening and closing using the keyboard.
+### 😃 Exercise 3: Character Face & Car Detail Textures
+- **Face Texturing**: A cartoon-style character face (inspired by *Cars*) was mapped onto the car’s windshield to simulate eyes.
+- **Detail Enhancement**:
+  - Custom textures were added to the **hood** and **front grille**.
+  - UV mapping ensured proper alignment and realism.
 
-### 🎮 Interaction & Controls
-- **Forward & Backward Movement**: The car can move independently using translation transformations.
-- **Wheel Rotation**: Wheels rotate automatically when the car moves.
-- **Hood Animation**: The hood can be opened and closed with a specific key.
+### 🖱️ Tools & Techniques
+- UV coordinate assignment (manual and tool-assisted)
+- Image-based texture mapping
+- Multi-material support in 3D models
+- Real-time rendering and debugging
 
-This project demonstrates hierarchical modeling and interactive animations, enhancing our understanding of real-time 3D transformations in computer graphics.
+This practice improved our skills in texture mapping, visual composition, and integrating custom models with detailed visual features.
 
