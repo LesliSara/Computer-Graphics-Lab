@@ -28,12 +28,13 @@ public:
 	GLfloat getllantaDerInf() { return llantaDerInf; }
 	GLfloat getllantaIzqInf() { return llantaIzqInf; }
 	GLfloat gettraslacion() { return traslacion; }
+	GLfloat gettraslacionHeli() { return traslacionHeli; }
 	~Window();
 private:
 	GLFWwindow* mainWindow;
 	GLint width, height;
 	GLfloat rotax, rotay, rotaz, cofreAbre, cofreCierra, llantaDerSup, llantaIzqSup,
-		llantaDerInf, llantaIzqInf, traslacion;
+		llantaDerInf, llantaIzqInf, traslacion, traslacionHeli;
 	bool keys[1024];
 	GLint bufferWidth, bufferHeight;
 	GLfloat lastX;

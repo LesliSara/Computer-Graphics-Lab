@@ -23,6 +23,7 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	traslacion = 0.0f;
 	cofreAbre = 0.0f;
 	cofreCierra = 0.0f;
+	traslacionHeli = 0.0f;
 
 	for (size_t i = 0; i < 1024; i++)
 	{
@@ -164,6 +165,14 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		theWindow->llantaIzqSup -= 10.0;
 		theWindow->llantaIzqInf -= 10.0;
 		theWindow->llantaDerInf -= 10.0;
+	}//Traslación coche
+	if (key == GLFW_KEY_M)
+	{
+		theWindow->traslacionHeli += 1.0;
+	}
+	if (key == GLFW_KEY_N)
+	{
+		theWindow->traslacionHeli -= 1.0;
 	}
 
 
