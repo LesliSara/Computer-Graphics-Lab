@@ -47,6 +47,7 @@ Texture dirtTexture;
 Texture plainTexture;
 Texture pisoTexture;
 Texture AgaveTexture;
+Texture dadoTexture;
 
 Model Kitt_M;
 Model Llanta_M;
@@ -57,6 +58,7 @@ Model Cofre_M;
 Model LlantaDerecha_M; //Es el mismo modelo para ambas llantas derechas
 Model LlantaIzquierda_M; //Es el mismo modelo para ambas llantas izquierdas
 Model Farola_M;
+Model Penny_M;
 
 
 Skybox skybox;
@@ -74,8 +76,12 @@ static double limitFPS = 1.0 / 60.0;
 // luz direccional
 DirectionalLight mainLight;
 //para declarar varias luces de tipo pointlight
-PointLight pointLights[MAX_POINT_LIGHTS];
+PointLight pointLights[MAX_POINT_LIGHTS];//Primer arreglo de luces puntuales, 4 luces en max_point_lights
+//La variable puede ser un valor estático de 4 luces porque lo dice
+
 SpotLight spotLights[MAX_SPOT_LIGHTS];
+SpotLight spotLights2[4];
+
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -112,6 +118,8 @@ void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat
 		vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
 	}
 }
+
+
 
 
 void CreateObjects()
@@ -151,15 +159,15 @@ void CreateObjects()
 	};
 
 	GLfloat vegetacionVertices[] = {
-		-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.5f, 0.5f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		-0.5f, 0.5f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,		1.0f, -1.0f, -1.0f,
+		0.5f, -0.5f, 0.0f,		1.0f, 0.0f,		1.0f, -1.0f, -1.0f,
+		0.5f, 0.5f, 0.0f,		1.0f, 1.0f,		1.0f, -1.0f, -1.0f,
+		-0.5f, 0.5f, 0.0f,		0.0f, 1.0f,		1.0f, -1.0f, -1.0f,
 
-		0.0f, -0.5f, -0.5f,		0.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.0f, -0.5f, 0.5f,		1.0f, 0.0f,		0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, 0.5f,		1.0f, 1.0f,		0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, -0.5f,		0.0f, 1.0f,		0.0f, 0.0f, 0.0f,
+		0.0f, -0.5f, -0.5f,		0.0f, 0.0f,		1.0f, -1.0f, -1.0f,
+		0.0f, -0.5f, 0.5f,		1.0f, 0.0f,		1.0f, -1.0f, -1.0f,
+		0.0f, 0.5f, 0.5f,		1.0f, 1.0f,		1.0f, -1.0f, -1.0f,
+		0.0f, 0.5f, -0.5f,		0.0f, 1.0f,		1.0f, -1.0f, -1.0f,
 
 
 	};
@@ -186,6 +194,68 @@ void CreateObjects()
 
 }
 
+void CrearDado()
+{
+	unsigned int cubo_indices[] = {
+		//top pyramid
+		0, 1, 2, //front
+		3, 4, 5,
+		6, 7, 8,
+		9, 10, 11,
+		//bottom pyramid
+		12, 13, 14,
+		15, 16, 17,
+		18, 19, 20,
+		21, 22, 23,
+
+	};
+
+	GLfloat cubo_vertices[] = {
+		//x			y			z			S		T			NX		NY		NZ
+		//top front
+		-0.5f,		0.0f,		0.5f,		0.01f,   0.51f,		0.0f,	-1.0f,	-1.0f,	//0
+		0.5f,		0.0f,		0.5f,		0.19f,	0.51f,		0.0f,	-1.0f,	-1.0f,	//1
+		0.0f,		0.65f,		0.0f,		0.10f,	0.99f,		0.0f,	-1.0f,	-1.0f,	//2
+		//top back
+		-0.5f,		0.0f,		-0.5f,		0.59f,   0.51f,		0.0f,	-1.0f,	1.0f,	//3
+		0.5f,		0.0f,		-0.5f,		0.41f,	0.51f,		0.0f,	-1.0f,	1.0f,	//4
+		0.0f,		0.65f,		0.0f,		0.50f,	0.99f,		0.0f,	-1.0f,	1.0f,	//5
+		//top right
+		0.5f,		0.0f,		0.5f,		0.21f,   0.51f,		-1.0f,	-1.0f,	0.0f,	//6
+		0.5f,		0.0f,		-0.5f,		0.39f,	0.51f,		-1.0f,	-1.0f,	0.0f,	//7
+		0.0f,		0.65f,		0.0f,		0.30f,	0.99f,		-1.0f,	-1.0f,	0.0f,	//8
+		//top left
+		-0.5f,		0.0f,		0.5f,		0.79f,   0.51f,		1.0f,	-1.0f,	0.0f,	//9
+		-0.5f,		0.0f,		-0.5f,		0.61f,	0.51f,		1.0f,	-1.0f,	0.0f,	//10
+		0.0f,		0.65f,		0.0f,		0.70f,	0.99f,		1.0f,	-1.0f,	0.0f,	//11
+
+
+		//bottom front
+		-0.5f,		0.0f,		0.5f,		0.50f,   0.01f,		0.0f,	1.0f,	-1.0f,	//12
+		0.5f,		0.0f,		0.5f,		0.41f,	0.49f,		0.0f,	1.0f,	-1.0f,	//13
+		0.0f,		-0.65f,		0.0f,		0.59f,	0.49f,		0.0f,	1.0f,	-1.0f,	//14
+		//bottom back		
+		-0.5f,		0.0f,		-0.5f,		0.01f,   0.49f,		0.0f,	1.0f,	1.0f,	//15
+		0.5f,		0.0f,		-0.5f,		0.10f,	0.01f,		0.0f,	1.0f,	1.0f,	//16
+		0.0f,		-0.65f,		0.0f,		0.19f,	0.49f,		0.0f,	1.0f,	1.0f,	//17
+		//bottom right		
+		0.5f,		0.0f,		0.5f,		0.99f,   0.51f,		-1.0f,	1.0f,	0.0f,	//18
+		0.5f,		0.0f,		-0.5f,		0.81f,	0.51f,		-1.0f,	1.0f,	0.0f,	//19
+		0.0f,		-0.65f,		0.0f,		0.90f,	0.99f,		-1.0f,	1.0f,	0.0f,	//20
+		//bottom left		
+		-0.5f,		0.0f,		0.5f,		0.21f,   0.49f,		1.0f,	1.0f,	0.0f,	//21
+		-0.5f,		0.0f,		-0.5f,		0.30f,	0.01f,		1.0f,	1.0f,	0.0f,	//22
+		0.0f,		-0.65f,		0.0f,		0.39f,	0.49f,		1.0f,	1.0f,	0.0f,	//23
+
+
+	};
+
+	Mesh* dado = new Mesh();
+	dado->CreateMesh(cubo_vertices, cubo_indices, 192, 24);
+	meshList.push_back(dado);
+
+}
+
 
 void CreateShaders()
 {
@@ -203,6 +273,7 @@ int main()
 
 	CreateObjects();
 	CreateShaders();
+	CrearDado();
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.3f, 0.5f);
 
@@ -216,6 +287,8 @@ int main()
 	pisoTexture.LoadTextureA();
 	AgaveTexture = Texture("Textures/Agave.tga");
 	AgaveTexture.LoadTextureA();
+	dadoTexture = Texture("Textures/textura_dado.jpg");
+	dadoTexture.LoadTextureA();
 
 	Kitt_M = Model();
 	Kitt_M.LoadModel("Models/kitt_optimizado.obj");
@@ -234,6 +307,8 @@ int main()
 	LlantaIzquierda_M.LoadModel("Models/Llanta_Izquierda.obj");
 	Farola_M = Model();
 	Farola_M.LoadModel("Models/Farola.obj");
+	Penny_M = Model();
+	Penny_M.LoadModel("Models/pennyM.obj");
 	
 
 	std::vector<std::string> skyboxFaces;
@@ -257,6 +332,8 @@ int main()
 		0.0f, -1.0f, 0.0f); //Sol
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
+
+	//POINLIGHTS PRÁCTICA 7
 	//Declaración de primer luz puntual
 	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,
 		0.0f, 1.0f,
@@ -271,6 +348,51 @@ int main()
 		0.3f, 0.02f, 0.01f);
 	pointLightCount++;
 
+	//Luz Penny
+	pointLights[2] = PointLight(1.0f, 1.0f, 0.0f,
+		0.3f, 0.4f,
+		20.0f, 4.0f, -10.0f,
+		0.3f, 0.1f, 0.05f);
+	pointLightCount++;
+
+
+
+	
+
+	////POINTLIGHTS PRÁCTICA 8
+	////luz verde
+	//pointLights[0] = PointLight(0.0f, 1.0f, 0.0f,
+	//	0.0f, 1.0f,
+	//	3.0f, 1.5f, 1.5f,
+	//	0.3f, 0.2f, 0.1f);
+	//pointLightCount++;
+	////Luz azul
+	//pointLights[1] = PointLight(0.0f, 0.0f, 1.0f,
+	//	0.2f, 0.6f,
+	//	0.0f, 8.0f, -10.0f,
+	//	0.3f, 0.02f, 0.01f);
+	//pointLightCount++;
+	////Luz roja
+	//pointLights[2] = PointLight(1.0f, 0.0f, 0.0f,
+	//	0.2f, 0.6f,
+	//	0.0f, 8.0f, -10.0f,
+	//	0.3f, 0.02f, 0.01f);
+	//pointLightCount++;
+	////Luz blanca
+	//pointLights[3] = PointLight(1.0f, 1.0f, 1.0f,
+	//	0.2f, 0.6f,
+	//	0.0f, 8.0f, -10.0f,
+	//	0.3f, 0.02f, 0.01f);
+	//pointLightCount++;
+
+	////ARREGLO DE POINTLIGHTS2
+	////Como son las mismas luces solo se igualan, esto funciona solo porque son las mismas cuatro luces
+	////No se incrementa el contador porque se necesitan solo 4 luces
+	//pointLights2[0] = pointLights[3];
+	//pointLights2[1] = pointLights[0];
+	//pointLights2[2] = pointLights[1];
+	//pointLights2[3] = pointLights[2];
+
 	unsigned int spotLightCount = 0;
 	//linterna
 	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
@@ -281,33 +403,40 @@ int main()
 		5.0f);
 	spotLightCount++;
 
-	//luz fija
-	spotLights[1] = SpotLight(0.0f, 0.0f, 1.0f,
-		0.5f, 3.0f,											
+	//cofre
+	spotLights[1] = SpotLight(0.1f, 0.0f, 0.0f,
+		4.0f, 3.0f,
 		0.0f, 0.0f, 0.0f,									
 		0.0f, 0.0f, 0.0f,									
 		1.0f, 0.0f, 0.0f,
 		10.0f);												
 	spotLightCount++;
 
+	//Avanza
 	spotLights[2] = SpotLight(0.0f, 0.0f, 1.0f,
 		0.5f, 3.0f,											
 		0.0f, 0.0f, 0.0f,									
 		0.0f, 0.0f, 0.0f,									
 		1.0f, 0.0f, 0.0f,
-		10.0f);												
+		20.0f);												
 	spotLightCount++;
 
-	//Luz amarilla Helicoptero
+	//retrocede
 	spotLights[3] = SpotLight(1.0f, 1.0f, 0.0f,
-		1.0f, 0.5f,
+		0.5f, 3.0f,
 		0.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
-		15.0f);
+		20.0f);
 	spotLightCount++;
 	
 	//se crean mas luces puntuales y spotlight 
+	spotLights2[0] = spotLights[0];
+	spotLights2[1] = spotLights[1];
+	spotLights2[2] = spotLights[3];
+	spotLights2[3] = spotLights[2];
+	//Segundo arreglo de luces para encender y apagar en retroceso y avance
+
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -351,16 +480,32 @@ int main()
 		lowerLight.y -= 0.3f;
 		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());//Con esta se liga a la camara
 		//Las demás luces se quedan fuera del while, por lo que si se comenta ya no se liga y se queda fija
-		spotLights[1].SetFlash(glm::vec3(6.0f + mainWindow.gettraslacion(), 1.8f, -3.5f), glm::vec3(1.0f, 0.0f, 0.0f));
-		spotLights[2].SetFlash(glm::vec3(6.0f + mainWindow.gettraslacion(), 1.8f, 3.5f), glm::vec3(1.0f, 0.0f, 0.0f));
-		spotLights[3].SetFlash(glm::vec3(0.0f - mainWindow.gettraslacionHeli(), 5.0f, 6.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		spotLights[1].SetFlash(glm::vec3(3.82f + mainWindow.gettraslacion() + (2.18f * cos(glm::radians(mainWindow.getcofreaAbre()))), 1.601f + (2.18f * sin(glm::radians(mainWindow.getcofreaAbre()))), 0.0f), glm::vec3(1.0f * cos(glm::radians(mainWindow.getcofreaAbre())), 1.0f * sin(glm::radians(mainWindow.getcofreaAbre())), 0.0f));
+		spotLights2[1].SetFlash(glm::vec3(3.82f + mainWindow.gettraslacion() + (2.18f * cos(glm::radians(mainWindow.getcofreaAbre()))), 1.601f + (2.18f * sin(glm::radians(mainWindow.getcofreaAbre()))), 0.0f), glm::vec3(1.0f * cos(glm::radians(mainWindow.getcofreaAbre())), 1.0f * sin(glm::radians(mainWindow.getcofreaAbre())), 0.0f));
+		
+		spotLights[2].SetFlash(glm::vec3(6.0f + mainWindow.gettraslacion(), 1.8f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		spotLights2[3].SetFlash(glm::vec3(6.0f + mainWindow.gettraslacion(), 1.8f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		
+		spotLights[3].SetFlash(glm::vec3(-5.3f + mainWindow.gettraslacion(), 1.8f, 0.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+		spotLights2[2].SetFlash(glm::vec3(-5.3f + mainWindow.gettraslacion(), 1.8f, 0.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
 
 
 		//información al shader de fuentes de iluminación
+		//AQUÍ SE CAMBIAN LAS LUCES
 		shaderList[0].SetDirectionalLight(&mainLight);
-		shaderList[0].SetPointLights(pointLights, pointLightCount);
-		shaderList[0].SetSpotLights(spotLights, spotLightCount);
-
+		if (mainWindow.getencederFarola() == 1) {
+			shaderList[0].SetPointLights(pointLights, pointLightCount);
+		}
+		else {
+			shaderList[0].SetPointLights(pointLights, pointLightCount-2);
+		}
+		if (mainWindow.getavanza() == 1) {
+			shaderList[0].SetSpotLights(spotLights, spotLightCount-1);
+		}
+		else {
+			shaderList[0].SetSpotLights(spotLights2, spotLightCount-1);
+		}
+	
 
 
 		glm::mat4 model(1.0);
@@ -372,10 +517,20 @@ int main()
 		model = glm::scale(model, glm::vec3(30.0f, 1.0f, 30.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-
 		pisoTexture.UseTexture();
 		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[2]->RenderMesh();
 
+
+		//Ayuda para ver luz cofre
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(40.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(3.0f, 1.0f, 3.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		pisoTexture.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
 
 		//Instancia del coche
@@ -428,6 +583,14 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 3.40f, -10.0));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Farola_M.RenderModel();
+
+		//DADO 8 CARAS
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-1.5f, 4.5f, -15.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		dadoTexture.UseTexture();
+		meshList[4]->RenderMesh();
 	
 		//Helicoptero
 		model = glm::mat4(1.0);
@@ -438,14 +601,19 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Blackhawk_M.RenderModel();
 
+		//PENNY 
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(20.0f, 4.0f, -10.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Penny_M.RenderModel();
+
 		//Agave ¿qué sucede si lo renderizan antes del coche y el helicóptero?
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, 1.0f, -4.0f));
 		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
-		
-		
 		//blending: transparencia o traslucidez
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

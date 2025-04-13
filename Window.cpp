@@ -24,6 +24,10 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	cofreAbre = 0.0f;
 	cofreCierra = 0.0f;
 	traslacionHeli = 0.0f;
+	encederFarola = 1;
+	apagarFarola = 0;
+	avanza = 0;
+	retrocede = 0;
 
 	for (size_t i = 0; i < 1024; i++)
 	{
@@ -130,26 +134,31 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	//Rotación cofre
 	if (key == GLFW_KEY_F)
 	{
-		if (theWindow->cofreAbre < 45) {
-			theWindow->cofreAbre += 5.0;
-			theWindow->cofreCierra -= 5.0;
+		if (theWindow->cofreAbre < 30) {
+			theWindow->cofreAbre += 1.5;
+			theWindow->cofreCierra -= 1.5;
 		}
 	}
 	if (key == GLFW_KEY_G)
 	{
 		if (theWindow->cofreCierra < 0) {
-			theWindow->cofreCierra += 5.0;
-			theWindow->cofreAbre -= 5.0;
+			theWindow->cofreCierra += 1.5;
+			theWindow->cofreAbre -= 1.5;
 		}
 	}
 	//Traslación coche
 	if (key == GLFW_KEY_J)
 	{
 		theWindow->traslacion += 1.0;
+		theWindow->avanza = 1;
+		theWindow->retrocede = 0;
+
 	}
 	if (key == GLFW_KEY_K)
 	{
 		theWindow->traslacion -= 1.0;
+		theWindow->retrocede = 1;
+		theWindow->avanza = 0;
 	}
 	//Giro Llantas
 	if (key == GLFW_KEY_O)
@@ -173,6 +182,17 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	if (key == GLFW_KEY_N)
 	{
 		theWindow->traslacionHeli -= 1.0;
+	}
+	//Encender y Apagar Farola
+	if (key == GLFW_KEY_T)
+	{
+		theWindow->encederFarola = 1;
+		theWindow->apagarFarola = 0;
+	}
+	if (key == GLFW_KEY_Y)
+	{
+		theWindow->apagarFarola = 1;
+		theWindow->encederFarola = 0;
 	}
 
 

@@ -29,12 +29,17 @@ public:
 	GLfloat getllantaIzqInf() { return llantaIzqInf; }
 	GLfloat gettraslacion() { return traslacion; }
 	GLfloat gettraslacionHeli() { return traslacionHeli; }
+	GLfloat getencederFarola() { return encederFarola; }
+	GLfloat getapagarFarola() { return apagarFarola; }
+	GLfloat getavanza() { return avanza; }
+	GLfloat getretrocede() { return retrocede; }
 	~Window();
 private:
 	GLFWwindow* mainWindow;
 	GLint width, height;
 	GLfloat rotax, rotay, rotaz, cofreAbre, cofreCierra, llantaDerSup, llantaIzqSup,
-		llantaDerInf, llantaIzqInf, traslacion, traslacionHeli;
+		llantaDerInf, llantaIzqInf, traslacion, traslacionHeli, encederFarola, apagarFarola,
+		avanza, retrocede;
 	bool keys[1024];
 	GLint bufferWidth, bufferHeight;
 	GLfloat lastX;
